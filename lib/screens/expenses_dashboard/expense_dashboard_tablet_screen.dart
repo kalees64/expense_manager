@@ -1,4 +1,5 @@
 import 'package:expense_manager/contstants/app_colors.dart';
+import 'package:expense_manager/screens/add_expense/add_expense_screen.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseDashboardTabletScreen extends StatefulWidget {
@@ -105,7 +106,12 @@ class _ExpenseDashboardTabletScreenState
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AddExpenseScreen()),
+          );
+        },
         backgroundColor: AppColors.primary,
         icon: const Icon(Icons.add, color: Colors.white),
         label: const Text(
@@ -291,7 +297,17 @@ class _ExpenseDashboardTabletScreenState
 
   Widget _buildQuickActionButton(String label, IconData icon, Color color) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        if (label == 'Add Income' || label == 'Add Expense') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  AddExpenseScreen(isIncome: label == 'Add Income'),
+            ),
+          );
+        }
+      },
       borderRadius: BorderRadius.circular(12),
       child: Container(
         padding: const EdgeInsets.all(14),
